@@ -1392,3 +1392,64 @@ h1, .hero h1 { font-family: var(--font-display); letter-spacing: -0.6px; }
   .tBottom{ align-items:flex-start; flex-direction:column; }
   .tBottom .btn{ width: fit-content; }
 }
+/* =========================
+   Mobile Fix Pack (phones)
+   ========================= */
+
+/* 1) Запрещаем картинкам "вылезать" даже если в HTML стоят width/height */
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+/* 2) Проекты: 4 фото внутри .projectMedia .ph превращаем в аккуратную сетку */
+.projectMedia .ph{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  align-content: start;
+  justify-items: stretch;
+}
+
+/* сами картинки в сетке */
+.projectMedia .ph img{
+  width: 100% !important;      /* перебиваем inline width */
+  height: auto !important;      /* перебиваем inline height */
+  aspect-ratio: 4 / 3;          /* ровные карточки */
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+/* 3) Вкладки "Кому мы помогаем": большие картинки тоже делаем адаптивными */
+.tabGrid .ph img{
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover;
+  display: block;
+}
+
+/* 4) На очень узких экранах делаем проекты в 1 колонку (по 1 фото в ряд) */
+@media (max-width: 520px){
+  .projectMedia .ph{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 5) Доп. комфорт на телефоне */
+@media (max-width: 580px){
+  .nav__inner{ gap: 10px; }
+  .brand__name{ font-size: 14px; }
+  .brand__tag{ font-size: 11px; }
+
+  .hero{ padding: 34px 0 10px; }
+  .section{ padding: 38px 0; }
+
+  .iconBtn{ width: 40px; height: 40px; border-radius: 12px; }
+  .btn--big{ padding: 12px 16px; }
+
+  /* чтобы длинные слова/строки не ломали ширину */
+  .projectBody, .tabText, .contact__card{ overflow-wrap: anywhere; }
+}
+
